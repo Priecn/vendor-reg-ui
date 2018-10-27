@@ -1,0 +1,12 @@
+.sub-category-sticky {
+    white-space: nowrap;
+    background-color: teal;
+    margin: 2px;
+    color: white;
+    border-radius: 0px;
+}
+
+.sub-category-sticky-text {
+    padding-right: 4px;
+    padding-left: 4px;
+}

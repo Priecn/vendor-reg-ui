@@ -1,0 +1,296 @@
+
+<div class="container" *ngIf="vendorAdded">
+    <div class="row mt-100" style="text-align: center;">
+      <h1>Vendor Added with id: {{savedVendor.id}}</h1>
+      <a class="btn btn-primary" href="http://localhost:4200">Go back</a>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="errorOccured">
+    <div class="row mt-100" style="text-align: center;">
+      <h1>Error Occured Try Again!</h1>
+      <a class="btn btn-primary" href="http://localhost:4200">Go back</a>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="!vendorAdded && !errorOccured">
+  <div class="row mb-2 mt-2">
+    <div class="col">
+        <h1>REGISTRATION FORM</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+      <div class="col">
+          <h4 style="text-align: center;">Vendor Details</h4>
+      </div>
+  </div>
+  <hr>
+  <form [formGroup]="serviceForm" (ngSubmit)="saveVendor()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstName">FirstName</label>
+        <input type="text" 
+               class="form-control" 
+               id="firstName" 
+               placeholder="First Name"
+               formControlName="firstName">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastName">LastName</label>
+        <input type="text" 
+               class="form-control" 
+               id="lastName" 
+               placeholder="Last Name"
+               formControlName="lastName">
+      </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="email">Email</label>
+          <input type="email" 
+                 class="form-control" 
+                 id="email" 
+                 placeholder="Email"
+                 formControlName="email">
+        </div>
+
+        <div class="form-group col-md-2 mt-5">
+            <div class="form-check">
+                <input class="form-check-input" 
+                       type="radio" 
+                       id="female"
+                       value="FEMALE" 
+                       formControlName="gender">
+                <label class="form-check-label" for="female">
+                  Female
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-md-2 mt-5">
+            <div class="form-check">
+                <input class="form-check-input" 
+                       type="radio" 
+                       id="male" 
+                       value="MALE"
+                       formControlName="gender">
+                <label class="form-check-label" for="male">
+                  Male
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="mobile">Mobile Number</label>
+          <input type="text" 
+                 class="form-control" 
+                 id="mobile" 
+                 placeholder="000-000-0000"
+                 formControlName="mobileNumber">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="phone">Phone Number</label>
+          <input type="text" 
+                 class="form-control" 
+                 id="phone" 
+                 placeholder="000-000-0000"
+                 formControlName="phoneNumber">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="dob">DOB</label>
+          <input type="date" 
+                 class="form-control" 
+                 id="dob"
+                 formControlName="dateOfBirth">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="regDate">Registration Date</label>
+          <input type="date" 
+                 class="form-control" 
+                 id="regDate"
+                 value="dt | date: 'yyyy-MM-dd'"
+                 formControlName="vendorRegDate">
+        </div>
+    </div>  
+    <div formGroupName="address">
+        <div class="form-group">
+            <label for="addressLine1">Address Line 1</label>
+            <input type="text" 
+                   class="form-control" 
+                   id="addressLine1" 
+                   placeholder="Enter house # and area"
+                   formControlName="addressLine1">
+          </div>
+          <div class="form-group">
+            <label for="addressLine2">Address Line 2</label>
+            <input type="text" 
+                   class="form-control" 
+                   id="addressLine2" 
+                   placeholder="Enter street"
+                   formControlName="addressLine2">
+          </div>
+      
+          <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="province">Province</label>
+                <select class="form-control" 
+                        id="province"
+                        formControlName="provinceId">
+                  <option selected>Choose one...</option>
+                  <option *ngFor="let province of provinces" value="{{province.id}}">{{province.name}}</option>
+                </select>
+            </div>
+      
+            <div class="form-group col-md-3">
+              <label for="city">City</label>
+              <input type="text" 
+                     class="form-control" 
+                     id="city"
+                     formControlName="city">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="state">State</label>
+              <input type="text" 
+                     class="form-control" 
+                     id="state"
+                     formControlName="state">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="pincode">Pincode</label>
+              <input type="text" 
+                     class="form-control" 
+                     id="pincode"
+                     formControlName="pincode">
+            </div>
+          </div>
+    </div>
+    
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h4 style="text-align: center;">Company Details</h4>
+        </div>
+    </div>
+    <hr>
+    
+    <div formGroupName="company">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="companyName">Company Name</label>
+              <input type="text" 
+                     class="form-control" 
+                     id="companyName" 
+                     placeholder="Company Name"
+                     formControlName="name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="category">Category of Business</label>
+                <select class="form-control" 
+                        id="category"
+                        formControlName="businessCategoryId"
+                        (change)="onSelectCategory($event.target.value)">
+                  <option value="choose" selected>Choose one...</option>
+                  <option *ngFor="let category of categories" 
+                          value="{{category.id}}">
+                          {{category.name}}
+                  </option>
+                </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="subCategory">Sub Category of Business</label>
+                <div *ngIf="selectedSubCategories" class="row">
+                    <div *ngFor="let sub of selectedSubCategories" class="sub-category-sticky">
+                        <div class="sub-category-sticky-text">
+                              {{sub.name}}
+                        </div>
+                  </div>
+                </div>
+                <input type="text" 
+                       class="form-control" 
+                       id="subCategory"
+                       (input)="searchSubCategory($event.target.value)"
+                       placeholder="Enter subCategory name...">
+                <select *ngIf="filteredSubCategories" class="form-control" 
+                        id="subCategory"
+                        [size]="getDropdownSize()"
+                        placeholder="Enter subCategory name..."
+                        (change)="subCategorySelected($event.target.value)">
+                  <option value="choose" selected>Choose one...</option>
+                  <option *ngFor="let category of filteredSubCategories" 
+                          value="{{category.id}}">
+                          {{category.name}}
+                  </option>
+                </select>
+                
+              </div>
+          </div>
+    
+          <div formGroupName="address">
+              <div class="form-group">
+                  <label for="addressLine1">Address Line 1</label>
+                  <input type="text" 
+                         class="form-control" 
+                         id="addressLine1" 
+                         placeholder="Enter house # and area"
+                         formControlName="addressLine1">
+                </div>
+                <div class="form-group">
+                  <label for="addressLine2">Address Line 2</label>
+                  <input type="text" 
+                         class="form-control" 
+                         id="addressLine2" 
+                         placeholder="Enter street"
+                         formControlName="addressLine2">
+                </div>
+            
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="province">Province</label>
+                      <select class="form-control" 
+                              id="province"
+                              formControlName="provinceId">
+                        <option selected>Choose one...</option>
+                        <option *ngFor="let province of provinces" 
+                                value="{{province.id}}">
+                                {{province.name}}
+                        </option>
+                      </select>
+                  </div>
+            
+                  <div class="form-group col-md-3">
+                    <label for="city">City</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="city"
+                           formControlName="city">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="state">State</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="state"
+                           formControlName="state">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="pincode"
+                           formControlName="pincode">
+                  </div>
+                </div>
+          </div>
+    </div>
+    
+    <button type="submit" class="btn btn-info mb-5" style="background-color: teal;">Register</button>
+  </form>
+</div>
